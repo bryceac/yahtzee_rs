@@ -1,6 +1,7 @@
 mod die;
 mod pair;
 mod combination;
+mod scoreboard;
 
 use die::Die;
 
