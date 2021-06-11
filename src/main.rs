@@ -3,6 +3,7 @@ mod pair;
 mod combination;
 mod scoreboard;
 mod dialogue;
+mod game_state;
 
 use die::Die;
 use dialogue::Dialogue;
