@@ -7,3 +7,13 @@ struct Game {
     game_state: GameState,
     scoreboard: Scoreboard
 }
+
+impl Game {
+    fn new() -> Game {
+        Game {
+            dice: [Die::new(); 5],
+            game_state: GameState::NewGame,
+            scoreboard: Scoreboard::new()
+        }
+    }
+}
