@@ -1,7 +1,7 @@
 use rand::Rng;
-use std::fmt;
+use std::{ cmp::{Ordering, PartialEq, PartialOrd}, fmt};
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq)]
 pub struct Die {
     pub number: u32,
     pub is_held: bool
@@ -28,5 +28,23 @@ impl fmt::Display for Die {
         } else {
             write!(f, "{}", self.number)
         }
+    }
+}
+
+impl PartialEq for Die {
+    fn eq(&self, other: &Self) -> bool {
+        self.number == other.number && self.is_held == other.is_held
+    }
+}
+
+impl Ord for Die {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.number.cmp(&other.number)
+    }
+}
+
+impl PartialOrd for Die {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
     }
 }

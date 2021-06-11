@@ -1,18 +1,19 @@
 use text_io::read;
-struct Dialogue {
-    message: String,
-    choices: Vec<String>
+use std::convert::TryInto;
+pub struct Dialogue {
+    pub message: String,
+    pub choices: Vec<String>
 }
 
 impl Dialogue {
-    fn new(message: &str, choices: Vec<String>) -> Dialogue {
+    pub fn new(message: &str, choices: Vec<String>) -> Dialogue {
         Dialogue {
             message: String::from(message),
             choices
         }
     }
 
-    fn run(&self) -> u32 {
+    pub fn run(&self) -> u32 {
         let mut choice: Option<u32> = None;
 
         while let None = choice {
@@ -22,7 +23,13 @@ impl Dialogue {
     
             print!("{}", self.message);
 
-            choice = read!();
+            let input: u32 = read!();
+
+            if input <= self.choices.len().try_into().unwrap() {
+                choice = Some(input);
+            } else {
+                println!("")
+            }
         }
 
         return choice.unwrap();
