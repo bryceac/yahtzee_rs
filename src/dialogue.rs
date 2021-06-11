@@ -1,4 +1,4 @@
-use std::io::{ stdin, stdout, Write };
+use text_io::read;
 struct Dialogue {
     message: String,
     choices: Vec<String>
@@ -22,16 +22,10 @@ impl Dialogue {
     
             print!("{}", self.message);
 
-            let _ = stdout().flush();
-
-            let mut input = String::new();
-
-            stdin().read_line(buf: &input).expect("Failed to retrieve input.");
-
-            if let Some(selection) {
-                choice = selection.parse::<u32>()
-            }
+            choice = read!();
         }
+
+        return choice.unwrap();
 
     }
 }

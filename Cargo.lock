@@ -82,6 +82,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "text_io"
+version = "0.1.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6cb170b4f47dc48835fbc56259c12d8963e542b05a24be2e3a1f5a6c320fd2d4"
+
+[[package]]
 name = "wasi"
 version = "0.10.2+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -94,4 +100,5 @@ dependencies = [
  "count_where",
  "maplit",
  "rand",
+ "text_io",
 ]
