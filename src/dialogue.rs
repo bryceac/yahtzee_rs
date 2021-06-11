@@ -1,5 +1,5 @@
 use text_io::read;
-use std::convert::TryInto;
+use std::{convert::TryInto, io::{stdout, Write} };
 pub struct Dialogue {
     pub message: String,
     pub choices: Vec<String>
@@ -22,6 +22,7 @@ impl Dialogue {
             }
     
             print!("{}", self.message);
+            let _ = stdout().flush();
 
             let input: u32 = read!();
 
