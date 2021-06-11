@@ -1,5 +1,5 @@
 mod die;
-
+mod pair;
 use die::Die;
 
 fn main() {
