@@ -19,13 +19,13 @@ impl ScoreBoard {
                 6 => 0
             ],
             lower_section: hashmap![
-                "Three of a Kind" => 0,
-                "Four of a Kind" => 0,
-                "Full House" => 0,
-                "Small Straight" => 0,
-                "Large Straight" => 0,
-                "Yahtzee" => 0,
-                "Chance" => 0
+                String::from("Three of a Kind") => 0,
+                String::from("Four of a Kind") => 0,
+                String::from("Full House") => 0,
+                String::from("Small Straight") => 0,
+                String::from("Large Straight") => 0,
+                String::from("Yahtzee") => 0,
+                String::from("Chance") => 0
             ],
             number_of_yahtzee_bonuses: 0
         }
