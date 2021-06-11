@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 rand = "0.8.3"
 count_where = "0.1"
+maplit = "1.0"
