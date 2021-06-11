@@ -4,6 +4,7 @@ mod combination;
 mod scoreboard;
 mod dialogue;
 mod game_state;
+mod game;
 
 use die::Die;
 use dialogue::Dialogue;

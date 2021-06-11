@@ -1,15 +1,15 @@
 use maplit::hashmap;
 use std::collections::HashMap;
 
-struct ScoreBoard {
-    upper_section: HashMap<u32, u32>,
-    lower_section: HashMap<String, u32>,
-    number_of_yahtzee_bonuses: u32
+pub struct Scoreboard {
+    pub upper_section: HashMap<u32, u32>,
+    pub lower_section: HashMap<String, u32>,
+    pub number_of_yahtzee_bonuses: u32
 }
 
-impl ScoreBoard {
-    fn new() -> ScoreBoard {
-        ScoreBoard {
+impl Scoreboard {
+    pub fn new() -> Scoreboard {
+        Scoreboard {
             upper_section: hashmap![
                 1 => 0,
                 2 => 0,
