@@ -29,7 +29,7 @@ impl Dialogue {
             if input <= self.choices.len().try_into().unwrap() {
                 choice = Some(input);
             } else {
-                println!("")
+                println!("Input not valid.")
             }
         }
 
