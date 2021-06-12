@@ -88,10 +88,31 @@ impl Game {
         return possibilities;
     }
 
-    pub fn run(&self) {
+    pub fn run(&mut self) {
         while !self.game_is_complete() {
-            
+            self.display_upper_section();
+            self.display_lower_section();
+
+            self.play_turn();
         }
+    }
+
+    fn display_upper_section(&self) {
+        if self.scoreboard.upper_section.is_empty() { return }
+
+        for (key, number) in self.scoreboard.upper_section.clone() {
+            println!("{}: {}", key, number)
+        }
+        println!("-----");
+    }
+
+    fn display_lower_section(&self) {
+        if self.scoreboard.lower_section.is_empty() { return }
+
+        for (key, number) in self.scoreboard.lower_section.clone() {
+            println!("{}: {}", key, number)
+        }
+        println!("-----");
     }
 
     fn filled_fields(&self) -> u32 {
