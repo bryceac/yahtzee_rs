@@ -4,7 +4,7 @@ use crate::scoreboard::Scoreboard;
 use crate::pair::Pair;
 use crate::combination::Combination;
 use crate::dialogue::Dialogue;
-use std::collections::HashMap;
+use std::{ collections::HashMap, process };
 use maplit::hashmap;
 use count_where::CountWhere;
 use regex::Regex;
@@ -97,6 +97,7 @@ impl Game {
     }
 
     fn get_numbers(&self) -> String {
+        if self.dice.iter().count_where(|&&d| d.number == 0) == 5 { return String::new(); }
         let mut results = String::new();
     
         for die in self.dice.iter() {
@@ -162,6 +163,98 @@ impl Game {
                     }
                     break;
                 }
+            }
+        }
+    }
+
+    fn play_turn(&mut self) {
+        let mut rolls = 0;
+
+        if rolls == 0 {
+            for die in self.dice.iter_mut() {
+                if die.is_held {
+                    die.is_held = false
+                }
+            }
+        }
+
+
+
+        while rolls <= 3 {
+            let roll = self.get_numbers();
+
+            println!("{}", roll);
+
+            match rolls {
+                0 => {
+                    let dialog = Dialogue::new("What would you like to do? ", vec![String::from("Roll"), String::from("quit")]);
+
+                    let choice = dialog.run();
+
+                    match choice {
+                        1 => {
+                            self.roll();
+                            rolls += 1;
+                        },
+                        2 => {
+
+                            if cfg!(windows) {
+                                process::exit(256);
+                            } else {
+                                process::exit(0);
+                            }  
+                        },
+                        _ => println!("Invalid choice.")
+                    }
+                },
+                1..=2 => {
+                    let dialog = Dialogue::new("What would you like to do? ", vec![String::from("Hold Dice"), String::from("Roll"), String::from("Score"), String::from("Quit")]);
+
+                    let choice = dialog.run();
+
+                    match choice {
+                        1 => self.save_die(),
+                        2 => {
+                            self.roll();
+                            rolls += 1;
+                        },
+                        3 => {
+                            self.score();
+                            rolls = 4;
+                        },
+                        4 => {
+
+                            if cfg!(windows) {
+                                process::exit(256);
+                            } else {
+                                process::exit(0);
+                            }  
+                        },
+                        _ => println!("invalid choice.")
+                    }
+                },
+                3 => {
+                    let dialog = Dialogue::new("What would you like to do? ", vec![String::from("Score"), String::from("Quit")]);
+
+                    let choice = dialog.run();
+
+                    match choice {
+                        1 => {
+                            self.score();
+                            rolls = 4;
+                        },
+                        2 => {
+
+                            if cfg!(windows) {
+                                process::exit(256);
+                            } else {
+                                process::exit(0);
+                            }  
+                        },
+                        _ => println!("Invalid choice.")
+                    }
+                },
+                _ => ()
             }
         }
     }
