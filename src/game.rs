@@ -86,11 +86,23 @@ impl Game {
         return possibilities;
     }
 
-    pub fn roll(&mut self) {
+    fn roll(&mut self) {
         if self.dice.iter().count_where(|&&d| d.is_held) == 5 { return }
         for die in self.dice.iter_mut() {
 
             die.roll()
         }
+    }
+
+    fn get_numbers(dice: &[Die; 5]) -> String {
+        let mut results = String::new();
+    
+        for die in dice {
+            let number = format!("{} ", die);
+    
+            results.push_str(&number);
+        }
+    
+        return results;
     }
 }
