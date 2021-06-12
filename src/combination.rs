@@ -40,37 +40,35 @@ fn count_sequential(dice: &[Die; 5]) -> u32 {
     let mut unique_numbers = unique_items(dice);
     unique_numbers.sort();
 
-    return unique_numbers.iter().fold(0, |sequential_numbers, number| {
-        if let Some(index) = unique_numbers.iter().position(|n| n == number) {
-
-            if let Some(last_number) = unique_numbers.iter().last() {
-                if number != last_number {
-                    let next_number = unique_numbers[index+1];
-
-                    if next_number != *last_number {
-                        if next_number - number == 1 {
-                            sequential_numbers + 1
-                        } else {
-                            sequential_numbers
-                        }
-                    } else {
-                        if next_number - number == 1 {
-                            sequential_numbers + 2
-                        } else {
-                            sequential_numbers
-                        }
-                    }
-
-                } else {
-                    sequential_numbers
+    let mut sequential_items: HashSet<u32> = HashSet::new();
+    
+    for (index, number) in unique_numbers.iter().enumerate() {
+        let last_number = unique_numbers[unique_numbers.len()-1];
+        
+        if *number != last_number {
+            let next_number = unique_numbers[index+1];
+            
+            if next_number != last_number {
+                if next_number - *number == 1 {
+                    sequential_items.insert(*number);
+                    sequential_items.insert(next_number);
                 }
             } else {
-                sequential_numbers
+                if let Some(largest_number) = sequential_items.iter().max() {
+                    if number != largest_number {
+                        if *number - largest_number == 1 {
+                            if next_number - *number == 1 {
+                                sequential_items.insert(*number);
+                                sequential_items.insert(next_number);
+                            }
+                        }
+                    }
+                }
             }
-        } else {
-            sequential_numbers
         }
-    })
+    }
+    
+    sequential_items.len() as u32
 }
 
 // grab only unique values from a given roll.
