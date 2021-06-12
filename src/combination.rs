@@ -6,6 +6,7 @@ use crate::pair::Pair;
 use std::collections::HashSet;
 
 /// Combination respresents the possible combinations in a game of Yahtzee.
+#[derive(Debug)]
 pub enum Combination {
     FullHouse,
     SmallStraight,
