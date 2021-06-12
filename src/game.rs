@@ -1,14 +1,24 @@
+// import modules, so that custom types are recognized.
 use crate::game_state::GameState;
 use crate::die::Die;
 use crate::scoreboard::Scoreboard;
 use crate::pair::Pair;
 use crate::combination::Combination;
 use crate::dialogue::Dialogue;
+
+// import modules needed for dealing with hash maps and exiting early
 use std::{ collections::HashMap, process };
+
+// import macro to help make creating hash maps easier
 use maplit::hashmap;
+
+// import module to help counting items meeting a particular condition
 use count_where::CountWhere;
+
+// import model that will help retrieve hash map keys, to use in scoring
 use regex::Regex;
 
+/// represents a game session
 pub struct Game {
     pub dice: [Die; 5],
     pub game_state: GameState,
@@ -16,6 +26,8 @@ pub struct Game {
 }
 
 impl Game {
+
+    /// create new Game object.
     pub fn new() -> Game {
         Game {
             dice: [Die::new(); 5],
@@ -24,6 +36,7 @@ impl Game {
         }
     }
 
+    // get possible values for the upper section when scoring in Yahtzee.
     pub fn upper_scoreboard_possibilities(&self) -> HashMap<u32, u32> {
         let numbers = self.dice.iter().map(|d| d.number).collect::<Vec<_>>();
 
@@ -37,6 +50,7 @@ impl Game {
         }
     }
 
+    // get possible values for the lower section when scoring.
     pub fn lower_scoreboard_possibilities(&self) -> HashMap<String, u32> {
         let mut possibilities: HashMap<String, u32> = hashmap! {
             String::from("Three of a Kind") => 0,
@@ -48,8 +62,10 @@ impl Game {
             String::from("Chance") => 0
         };
 
+        // get sum of dice roll, to have an easy way to retrieve the sum when needed.
         let sum = self.dice.iter().fold(0, |tally, d| tally + d.number);
 
+        // check what pairs are formed by the dice
         match Pair::pair(&self.dice) {
             Some(Pair::FiveOfAKind) => {
                 possibilities.insert(String::from("Three of a Kind"), sum);
@@ -71,6 +87,7 @@ impl Game {
             }
         }
 
+        // check for combinations formed by the dice.
         match Combination::combination(&self.dice) {
             Some(Combination::FullHouse) => {
                 possibilities.insert(String::from("Full House"), 25);
@@ -90,6 +107,7 @@ impl Game {
         return possibilities;
     }
 
+    // start the game
     pub fn run(&mut self) {
         while !self.game_is_complete() {
             self.display_upper_section();
@@ -99,6 +117,7 @@ impl Game {
         }
     }
 
+    // display points scored in the upper section of the scoreboard
     fn display_upper_section(&self) {
         if self.scoreboard.upper_section.is_empty() { return }
 
@@ -108,6 +127,7 @@ impl Game {
         println!("-----");
     }
 
+    // display points scored in the lower section of the scoreboard
     fn display_lower_section(&self) {
         if self.scoreboard.lower_section.is_empty() { return }
 
@@ -117,16 +137,19 @@ impl Game {
         println!("-----");
     }
 
+    // determine number of items in hash maps, to help determine when game is over.
     fn filled_fields(&self) -> u32 {
         let total = self.scoreboard.upper_section.len() + self.scoreboard.lower_section.len();
 
         return total as u32;
     }
 
+    // end game when there are no fields to be filled.
     fn game_is_complete(&self) -> bool {
         self.filled_fields() == 13
     }
 
+    // roll all dice not held, and let user know if rolling is not possible.
     fn roll(&mut self) -> Result<(), String> {
         if self.dice.iter().count_where(|&&d| d.is_held) == 5 { 
             return Err(String::from("There are no dice to roll."));
@@ -141,6 +164,7 @@ impl Game {
         Ok(())
     }
 
+    // retrieve numbers rolled, so use can make optimal decisions.
     fn get_numbers(&self) -> String {
         if self.dice.iter().count_where(|&&d| d.number == 0) == 5 { return String::new(); }
         let mut results = String::new();
@@ -154,6 +178,7 @@ impl Game {
         return results;
     }
 
+    // allow user to save any die of their choice.
     fn save_die(&mut self) {
         let mut choices: Vec<String> = self.dice.iter().map(|d| format!("{}", d.number)).collect();
         choices.push(String::from("Done"));
@@ -179,6 +204,7 @@ impl Game {
         }
     }
 
+    // allow player to score. There is no way to leave because scoring is required after three rolls.
     fn score(&mut self) {
         let upper_possibilities: HashMap<u32, u32> = self.upper_scoreboard_possibilities().iter().filter(|(k, _)| !self.scoreboard.upper_section.contains_key(k)).map(|(&key, &value)| (key, value)).collect();
         let lower_possibilities: HashMap<String, u32> = self.lower_scoreboard_possibilities().iter().filter(|(k, _)| !self.scoreboard.lower_section.contains_key(k.clone())).map(|(key, &value)| (key.clone(), value)).collect();
@@ -213,16 +239,27 @@ impl Game {
                                 self.scoreboard.lower_section.insert(key, *value);
                             }
                         }
+
+                        // make sure yahtzee bonsuses are given.properly
+                        if let Some(Pair::FiveOfAKind) = Pair::pair(&self.dice) {
+                            if let Some(50) = self.scoreboard.lower_section.get(&String::from("Yahtzee")) {
+                                self.scoreboard.number_of_yahtzee_bonuses += 1;
+                            }
+                        }
                     }
-                    break;
+                    break; // exit loop after scoring.
                 }
             }
         }
     }
 
+    // run a round in the game.
     fn play_turn(&mut self) {
+
+        // create variable to track the numbers of rolls taken, so that player gets only 3 rolls.
         let mut rolls = 0;
 
+        // make sure are dice are available on the first roll.
         if rolls == 0 {
             for die in self.dice.iter_mut() {
                 if die.is_held {
@@ -238,6 +275,7 @@ impl Game {
 
             println!("{}", roll);
 
+            // determine the number of rolls taken, so that the user is presented with the appropriate options and functions.
             match rolls {
                 0 => {
                     let dialog = Dialogue::new("What would you like to do? ", vec![String::from("Roll"), String::from("quit")]);
@@ -321,6 +359,7 @@ impl Game {
     }
 }
 
+// retrieve key string from a given text, so that scores can be applied easily.
 fn key_search(text: &String) -> Option<String> {
     if let Ok(expression) = Regex::new("(.*?) for") {
         if let Some(captures) = expression.captures(text) {
