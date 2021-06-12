@@ -163,7 +163,15 @@ impl Game {
             match choice {
                 0 => println!("Not a valid option"),
                 6 => is_done = true,
-                _ => self.dice[choice-1].is_held = if self.dice[choice-1].is_held { false } else { true }
+                _ => {
+                    self.dice[choice-1].is_held = if self.dice[choice-1].is_held { false } else { true };
+                    
+                    if self.dice[choice-1].is_held {
+                        println!("saved die {}", choice);
+                    } else {
+                        println!("put back die {}", choice);
+                    }
+                }
             }
         }
     }
