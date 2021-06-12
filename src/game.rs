@@ -95,10 +95,10 @@ impl Game {
         }
     }
 
-    fn get_numbers(dice: &[Die; 5]) -> String {
+    fn get_numbers(&self) -> String {
         let mut results = String::new();
     
-        for die in dice {
+        for die in self.dice.iter() {
             let number = format!("{} ", die);
     
             results.push_str(&number);
@@ -123,4 +123,33 @@ impl Game {
             }
         }
     }
+
+    fn score(&mut self) {
+        let upper_possibilities: HashMap<u32, u32> = self.upper_scoreboard_possibilities(&self.dice).iter().filter(|(k, _)| !self.scoreboard.upper_section.contains_key(k)).map(|(&key, &value)| (key, value)).collect();
+        let lower_possibilities: HashMap<String, u32> = self.lower_scoreboard_possibilities(&self.dice).iter().filter(|(k, _)| !self.scoreboard.lower_section.contains_key(k.clone())).map(|(key, &value)| (key.clone(), value)).collect();
+
+        let mut choices: Vec<String> = vec![];
+
+        for (key, value) in upper_possibilities {
+            choices.push(format!("{} for {} points", key, value));
+        }
+
+        for (key, value) in lower_possibilities {
+            choices.push(format!("{} for {} points", key, value));
+        }
+
+        let dialog = Dialogue::new("What do you want to score? ", choices);
+
+        loop {
+            let choice = dialog.run();
+
+            match choice {
+                0 => println!("invalid choice."),
+                _ => {
+
+                }
+            }
+        }
+    }
 }
+
