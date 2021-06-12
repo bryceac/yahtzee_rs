@@ -66,7 +66,9 @@ impl Game {
                 possibilities.insert(String::from("Three of a Kind"), sum);
                 possibilities.insert(String::from("Chance"), sum);
             },
-            None => ()
+            None => {
+                possibilities.insert(String::from("Chance"), sum);
+            }
         }
 
         match Combination::combination(&self.dice) {
