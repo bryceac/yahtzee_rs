@@ -3,6 +3,7 @@ use crate::die::Die;
 use crate::scoreboard::Scoreboard;
 use crate::pair::Pair;
 use crate::combination::Combination;
+use crate::dialogue::Dialogue;
 use std::collections::HashMap;
 use maplit::hashmap;
 use count_where::CountWhere;
@@ -104,5 +105,22 @@ impl Game {
         }
     
         return results;
+    }
+
+    fn save_die(&mut self) {
+        let mut choices: Vec<String> = self.dice.iter().map(|d| format!("{}", d.number)).collect();
+        choices.push(String::from("Done"));
+
+        let dialog = Dialogue::new("Which die would you like to save (Choose Done to exit and choosing the same number again will put it back)? ", choices);
+        let mut is_done = false;
+
+        while !is_done {
+            let choice = dialog.run() as usize;
+            match choice {
+                0 => println!("Not a valid option"),
+                6 => is_done = true,
+                _ => self.dice[choice-1].is_held = if self.dice[choice-1].is_held { false } else { true }
+            }
+        }
     }
 }
