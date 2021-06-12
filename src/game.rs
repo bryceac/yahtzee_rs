@@ -219,6 +219,7 @@ impl Game {
             choices.push(format!("{} for {} points", key, value));
         }
 
+        // check if yahtzee has been scored before scoring, to make sure bonus is awarded appropriately.
         let one_yahtzee = self.scoreboard.lower_section.contains_key(&String::from("Yahtzee"));
 
         let dialog = Dialogue::new("What do you want to score? ", choices);
