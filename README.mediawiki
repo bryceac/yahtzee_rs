@@ -1,0 +1,43 @@
+=yahtzee_rs=
+
+'''Author:''' Bryce Campbell
+
+'''Copyright:''' 2021
+
+'''License:''' See LICENSE
+
+'''Description:''' Rust port of <a href="https://github.com/bryceac/yahtzee">yahtzee</a>, which should work on platforms either not supported or supported well by Swift.
+
+'''Version:''' 0.1
+
+==Notes==
+
+This has been tested on macOS Big Sur with Rust 1.51, but <strong>should</strong> work on platform supported by Rust, including Windows, due to cargo actually working on Windows, unlike Swift Package Manager.
+
+==Questions==
+
+<ul>
+<li>
+<dl>
+<dt style="font-weight:bold">Why port this program to Rust?</dt>
+<dd>
+<p>While Swift is my preferred language, it is not that that usable outside Linux and Mac, even though Windows does have an official Swift compiler at the time of writing this file.</p>
+<p>As a result, I have to use a different programming language, and Rust is the next most comfortable language for me to use.</p>
+<p>On the plus side, it has given me even more experience with Rust, as I could try to see how to piece things together out of multiple files, unlike my other Rust projects, which have all mostly been only one file.</p>
+</dl>
+</li>
+<li>
+<dt style="font-weight:bold">Will this have a high score table?</dt>
+<dd>
+<p>Like the Swift version, this likely will not have a high score table, though I made add one in eventually when I find the appropriate place to store one (most resources suggest location that are not globally available to all users).</p>
+</dd>
+</li>
+</ul>
+
+==Building==
+
+To build the program, download an archive and extract it or clone this repository, open a terminal emulator window in the location of the repository, and enter the following:
+
+<pre>
+cargo build
+</pre>
