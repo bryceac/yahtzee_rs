@@ -9,7 +9,7 @@ use maplit::hashmap;
 use count_where::CountWhere;
 use regex::Regex;
 
-struct Game {
+pub struct Game {
     pub dice: [Die; 5],
     pub game_state: GameState,
     pub scoreboard: Scoreboard
