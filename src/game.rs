@@ -281,7 +281,7 @@ impl Game {
             // determine the number of rolls taken, so that the user is presented with the appropriate options and functions.
             match rolls {
                 0 => {
-                    let dialog = Dialogue::new("What would you like to do? ", vec![String::from("Roll"), String::from("quit")]);
+                    let dialog = Dialogue::new("What would you like to do? ", vec![String::from("Roll"), String::from("Quit")]);
 
                     let choice = dialog.run();
 
