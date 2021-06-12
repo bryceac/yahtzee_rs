@@ -11,5 +11,4 @@ use dialogue::Dialogue;
 
 fn main() {
     let mut dice = [Die::new(); 5];
-    
 }
