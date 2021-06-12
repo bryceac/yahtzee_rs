@@ -8,7 +8,6 @@ mod game;
 
 use die::Die;
 use dialogue::Dialogue;
-use count_where::CountWhere;
 
 fn main() {
     let mut dice = [Die::new(); 5];
@@ -29,13 +28,6 @@ fn main() {
             2 => break,
             _ => {}
         }
-    }
-}
-
-fn roll(dice: &mut [Die; 5]) {
-    if dice.iter().count_where(|&&d| d.is_held) == 5 { return }
-    for die in dice {
-        die.roll();
     }
 }
 

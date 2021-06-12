@@ -85,4 +85,12 @@ impl Game {
 
         return possibilities;
     }
+
+    pub fn roll(&mut self) {
+        if self.dice.iter().count_where(|&&d| d.is_held) == 5 { return }
+        for die in self.dice.iter_mut() {
+
+            die.roll()
+        }
+    }
 }
