@@ -57,3 +57,25 @@ fn main() {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::die::Die;
+    use super::combination::Combination;
+    use matches::assert_matches;
+
+    #[test]
+    fn is_not_small_straight() {
+        let mut dice = [Die::new(); 5];
+
+        dice[0].number = 1;
+        dice[1].number = 2;
+        dice[2].number = 5;
+        dice[3].number = 3;
+        dice[4].number = 6;
+
+        if let Some(combo) = Combination::combination(&dice) {
+            assert_matches!(Combination::SmallStraight, combo);
+        }
+    }
+}
