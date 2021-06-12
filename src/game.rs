@@ -127,8 +127,10 @@ impl Game {
         self.filled_fields() == 13
     }
 
-    fn roll(&mut self) {
-        if self.dice.iter().count_where(|&&d| d.is_held) == 5 { return }
+    fn roll(&mut self) -> Result<(), String> {
+        if self.dice.iter().count_where(|&&d| d.is_held) == 5 { 
+            return Err(String::from("There are no dice to roll."));
+         }
         for die in self.dice.iter_mut() {
 
             if !die.is_held {
@@ -136,6 +138,7 @@ impl Game {
             }
             
         }
+        Ok(())
     }
 
     fn get_numbers(&self) -> String {
@@ -243,8 +246,11 @@ impl Game {
 
                     match choice {
                         1 => {
-                            self.roll();
-                            rolls += 1;
+                            if let Err(e) = self.roll() {
+                                println!("{}", e)
+                            } else {
+                                rolls += 1
+                            }    
                         },
                         2 => {
 
@@ -265,8 +271,13 @@ impl Game {
                     match choice {
                         1 => self.save_die(),
                         2 => {
-                            self.roll();
-                            rolls += 1;
+                            {
+                                if let Err(e) = self.roll() {
+                                    println!("{}", e)
+                                } else {
+                                    rolls += 1
+                                }    
+                            }
                         },
                         3 => {
                             self.score();
