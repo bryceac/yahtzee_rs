@@ -65,6 +65,12 @@ fn count_sequential(dice: &[Die; 5]) -> u32 {
                     }
                 }
             }
+        } else {
+            if let Some(largest_number) = sequential_items.iter().max() {
+                if *number - largest_number == 1 {
+                    sequential_items.insert(*number);
+                }
+            }
         }
     }
     
