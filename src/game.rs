@@ -219,6 +219,8 @@ impl Game {
             choices.push(format!("{} for {} points", key, value));
         }
 
+        let one_yahtzee = self.scoreboard.lower_section.contains_key(&String::from("Yahtzee"));
+
         let dialog = Dialogue::new("What do you want to score? ", choices);
 
         loop {
@@ -242,7 +244,7 @@ impl Game {
 
                         // make sure yahtzee bonsuses are given.properly
                         if let Some(Pair::FiveOfAKind) = Pair::pair(&self.dice) {
-                            if let Some(50) = self.scoreboard.lower_section.get(&String::from("Yahtzee")) {
+                            if one_yahtzee {
                                 self.scoreboard.number_of_yahtzee_bonuses += 1;
                             }
                         }
