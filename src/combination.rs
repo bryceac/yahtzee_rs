@@ -1,7 +1,11 @@
+// import custom types, so that they are recognized.
 use crate::die::Die;
 use crate::pair::Pair;
+
+// import HashMap, so that can can be used.
 use std::collections::HashSet;
 
+/// Combination respresents the possible combinations in a game of Yahtzee.
 pub enum Combination {
     FullHouse,
     SmallStraight,
@@ -9,6 +13,10 @@ pub enum Combination {
 }
 
 impl Combination {
+    /**
+     * Determine if a given roll forms a combination.
+     * The following also makes a call to Pair's pair method, to help determine if the combination forms a Full House, as a Full House is also a Three of a kind.
+     */
     pub fn combination(roll: &[Die; 5]) -> Option<Combination> {
         if let Some(Pair::ThreeOfAKind) = Pair::pair(roll) {
             if unique_items(roll).len() == 2 {
@@ -26,6 +34,7 @@ impl Combination {
     }
 }
 
+// check how dice have a difference of only 1.
 fn count_sequential(dice: &[Die; 5]) -> u32 {
     let mut unique_numbers = unique_items(dice);
     unique_numbers.sort();
@@ -63,6 +72,7 @@ fn count_sequential(dice: &[Die; 5]) -> u32 {
     })
 }
 
+// grab only unique values from a given roll.
 fn unique_items(dice: &[Die; 5]) -> Vec<u32> {
     let unique_set = dice.iter().map(|d| d.number).collect::<HashSet<_>>();
 

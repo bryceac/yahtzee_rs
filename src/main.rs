@@ -1,3 +1,4 @@
+// load modules, so they can be use in application
 mod die;
 mod pair;
 mod combination;
@@ -6,25 +7,33 @@ mod dialogue;
 mod game_state;
 mod game;
 
+// import custom types
 use die::Die;
 use game::Game;
 use game_state::GameState;
 use scoreboard::Scoreboard;
+
+// import stuff needed to deal with console
 use text_io::read;
 use std::io::{stdout, Write};
 
 fn main() {
+
+    // create game object, to be able to run and modify game easily.
     let mut game = Game::new();
 
+    // run a loop that will continue until the game state is game over, to ensure player can play as long as they want.
     loop {
         if let GameState::GameOver = game.game_state { break }
 
         game.run();
 
+        // retrieve score and notify users of bonuses, so they know how well they did.
         println!("Your final score is {}", game.scoreboard.total_score());
         println!("Upper section greater than or equal to 63? {}", if game.scoreboard.upper_score_is_63_or_larger() { "Yes" } else { "No" });
         println!("Multiple Yahtzees? {}", if game.scoreboard.mutliple_yahtzees() { "Yes" } else { "No" });
 
+        // allow the user the chance to immediately start a new round.
         let mut play_again: Option<bool> = None;
 
         while let None = play_again {
