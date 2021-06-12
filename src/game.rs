@@ -294,12 +294,7 @@ impl Game {
                             }    
                         },
                         2 => {
-
-                            if cfg!(windows) {
-                                process::exit(256);
-                            } else {
-                                process::exit(0);
-                            }  
+                            process::exit(0);
                         },
                         _ => println!("Invalid choice.")
                     }
@@ -325,12 +320,7 @@ impl Game {
                             rolls = 4;
                         },
                         4 => {
-
-                            if cfg!(windows) {
-                                process::exit(256);
-                            } else {
-                                process::exit(0);
-                            }  
+                            process::exit(0); 
                         },
                         _ => println!("invalid choice.")
                     }
@@ -346,12 +336,7 @@ impl Game {
                             rolls = 4;
                         },
                         2 => {
-
-                            if cfg!(windows) {
-                                process::exit(256);
-                            } else {
-                                process::exit(0);
-                            }  
+                            process::exit(0); 
                         },
                         _ => println!("Invalid choice.")
                     }
