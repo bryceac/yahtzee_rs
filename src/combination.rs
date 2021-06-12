@@ -9,7 +9,7 @@ pub enum Combination {
 }
 
 impl Combination {
-    fn combination(roll: &[Die; 5]) -> Option<Combination> {
+    pub fn combination(roll: &[Die; 5]) -> Option<Combination> {
         if let Some(Pair::ThreeOfAKind) = Pair::pair(roll) {
             if unique_items(roll).len() == 2 {
                 Some(Combination::FullHouse)
