@@ -41,3 +41,33 @@ To build the program, download an archive and extract it or clone this repositor
 <pre>
 cargo build
 </pre>
+
+This will create an executable that can be immediately run via:
+
+<pre>
+cargo run
+</pre>
+
+==Installation==
+
+To install this program on a machine, one of two things can be done.
+
+On a Unix-like OS, such as macOS and Linux, run the following as root/superuser:
+
+<pre>
+make install
+</pre>
+
+If on Windows, the MSI file that should be included with releases should be used instead.
+
+==Usage==
+
+This is an interactive command line interface game, as such only needs to be invoked like this:
+
+<pre>
+yahtzee
+</pre>
+
+==Support==
+
+As I am still not as experienced with Rust as I am with Swift, I might not be able to help out too much, especially because the issue may be in the crates used, but I will try my best for as long as I work on this port, which will be on an as needed basis.
