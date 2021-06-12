@@ -88,6 +88,22 @@ impl Game {
         return possibilities;
     }
 
+    pub fn run(&self) {
+        while !self.game_is_complete() {
+            
+        }
+    }
+
+    fn filled_fields(&self) -> u32 {
+        let total = self.scoreboard.upper_section.len() + self.scoreboard.lower_section.len();
+
+        return total as u32;
+    }
+
+    fn game_is_complete(&self) -> bool {
+        self.filled_fields() == 13
+    }
+
     fn roll(&mut self) {
         if self.dice.iter().count_where(|&&d| d.is_held) == 5 { return }
         for die in self.dice.iter_mut() {
