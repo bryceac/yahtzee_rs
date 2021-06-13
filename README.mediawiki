@@ -100,7 +100,7 @@ The above will bring only the Die struct into scope.
 
 Please note that this library was not designed with Serde in mind, though you <strong>should</strong> be able to use it to allow users to customize names for the lower section, thanks to scoreboard having empty HashMaps.
 
-Also, other components, like the Game struct and Library struct are not included in the library, so that the user is free to choose whether they want to give their application a GUI or not. 
+Also, other components, like the Game struct and Dialogue struct are not included in the library, so that the user is free to choose whether they want to give their application a GUI or not. 
 
 ==Support==
 
