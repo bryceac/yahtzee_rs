@@ -20,7 +20,7 @@ This has been tested on macOS Big Sur with Rust 1.51, but <strong>should</strong
 <dt style="font-weight:bold">0.1</dt>
 <dd>Released Jun. 12, 2021. Initial release.</dd>
 <dt style="font-weight:bold">0.1.1</dt>
-<dd>Released Jun. 13, 2021. Add bonus feedback, so players know what exactly their bonuses were and move things into a library that can be used by others.</dd>
+<dd>Released Jun. 13, 2021. Add bonus feedback, so players know what exactly their bonuses were, and move things into a library that can be used by others.</dd>
 </dl>
 
 ==Questions==
