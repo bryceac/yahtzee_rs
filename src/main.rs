@@ -1,18 +1,3 @@
-// load modules, so they can be use in application
-mod die;
-mod pair;
-mod combination;
-mod scoreboard;
-mod dialogue;
-mod game_state;
-mod game;
-
-// import custom types
-use die::Die;
-use game::Game;
-use game_state::GameState;
-use scoreboard::Scoreboard;
-
 // import stuff needed to deal with console
 use text_io::read;
 use std::io::{stdout, Write};
