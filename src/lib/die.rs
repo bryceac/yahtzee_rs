@@ -4,7 +4,7 @@ use rand::Rng; // import module needed to get random numbers
 use std::{ cmp::{Ordering, PartialEq, PartialOrd}, fmt};
 
 
-/// represents a die object in a game.
+/// Represents a die object in a game.
 #[derive(Copy, Clone, Eq)]
 pub struct Die {
     /// value rolled. Defaults to 0.

@@ -1,7 +1,7 @@
 use count_where::CountWhere; // import library to making counting elements easier.
 use crate::die::Die; // import custom type, so type will be recognized
 
-/// Pair respresent the most basic pairs in a game of Yahtzee
+/// Respresent the most basic pairs in a game of Yahtzee
 pub enum Pair {
     ThreeOfAKind,
     FourOfAKind,

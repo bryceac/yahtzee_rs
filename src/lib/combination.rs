@@ -5,7 +5,7 @@ use crate::pair::Pair;
 // import HashMap, so that can can be used.
 use std::collections::HashSet;
 
-/// Combination respresents the possible combinations in a game of Yahtzee.
+/// Respresents the possible combinations in a game of Yahtzee.
 #[derive(Debug)]
 pub enum Combination {
     FullHouse,

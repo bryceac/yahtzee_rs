@@ -1,6 +1,6 @@
 use std::collections::HashMap; // import HashMap, so that hash maps can be used.
 
-/// Scoreboard represents a Yahtzee scoreboard.
+/// Represents a Yahtzee score sheet.
 pub struct Scoreboard {
     pub upper_section: HashMap<u32, u32>,
     pub lower_section: HashMap<String, u32>,
