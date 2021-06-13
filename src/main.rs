@@ -24,8 +24,8 @@ fn main() {
 
         // retrieve score and notify users of bonuses, so they know how well they did.
         println!("Your final score is {}", game.scoreboard.total_score());
-        println!("Upper section greater than or equal to 63? {}", if game.scoreboard.upper_score_is_63_or_larger() { "Yes" } else { "No" });
-        println!("Multiple Yahtzees? {}", if game.scoreboard.mutliple_yahtzees() { "Yes" } else { "No" });
+        println!("Upper section greater than or equal to 63? {}", if game.scoreboard.upper_score_is_63_or_larger() { "Yes (35 point bonus) " } else { "No" });
+        println!("Multiple Yahtzees? {}", if game.scoreboard.mutliple_yahtzees() { format!("Yes ({} point bonus)", game.scoreboard.number_of_yahtzee_bonuses*100) } else { String::from("No") });
 
         // allow the user the chance to immediately start a new round.
         let mut play_again: Option<bool> = None;
