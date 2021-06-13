@@ -37,10 +37,12 @@ This has been tested on macOS Big Sur with Rust 1.51, but <strong>should</strong
 </dl>
 </li>
 <li>
+<dl>
 <dt style="font-weight:bold">Will this have a high score table?</dt>
 <dd>
 <p>Like the Swift version, this likely will not have a high score table, though I made add one in eventually when I find the appropriate place to store one (most resources suggest location that are not globally available to all users).</p>
 </dd>
+</dl>
 </li>
 </ol>
 
