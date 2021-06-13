@@ -4,6 +4,9 @@ mod dialogue;
 // import stuff needed from root directory.
 use game::Game;
 
+// import stuff from internal library, to make sure things are recognized.
+use lib_yahtzee::{ Die, GameState, Scoreboard };
+
 // import stuff needed to deal with console
 use text_io::read;
 use std::io::{stdout, Write};
