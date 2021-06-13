@@ -2,6 +2,10 @@ mod game;
 mod game_state;
 mod dialogue;
 
+//
+use game::Game;
+use game_state::GameState;
+
 // import stuff needed to deal with console
 use text_io::read;
 use std::io::{stdout, Write};
