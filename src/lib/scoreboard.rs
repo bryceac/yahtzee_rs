@@ -28,17 +28,17 @@ impl Scoreboard {
         self.lower_section.values().fold(0, |tally, value| tally + value)
     }
 
-    // determine if minimum score was met to get a bonus
+    /// determine if minimum score was met to get a bonus for the upper section
     pub fn upper_score_is_63_or_larger(&self) -> bool {
         self.upper_score() >= 63
     }
     
-    // determine if any yahtzee bonsuses were gain, in order to give the appropriate number of bonus points.
+    /// determine if any yahtzee bonsuses were gained, in order to give the appropriate number of bonus points.
     pub fn mutliple_yahtzees(&self) -> bool {
         self.number_of_yahtzee_bonuses >= 1
     }
 
-    // tally up the total score, so the player can see how well they did.
+    /// tally up the total score, so the player can see how well they did.
     pub fn total_score(&self) -> u32 {
         let mut total: u32 = 0;
 
