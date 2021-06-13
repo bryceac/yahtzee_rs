@@ -35,7 +35,7 @@ impl Combination {
     }
 }
 
-// check how dice have a difference of only 1.
+// check how many dice have a difference of only 1.
 fn count_sequential(dice: &[Die; 5]) -> u32 {
     let mut unique_numbers = unique_items(dice);
     unique_numbers.sort();
