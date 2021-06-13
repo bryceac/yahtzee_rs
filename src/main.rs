@@ -1,10 +1,8 @@
 mod game;
-mod game_state;
 mod dialogue;
 
-//
+// import stuff needed from root directory.
 use game::Game;
-use game_state::GameState;
 
 // import stuff needed to deal with console
 use text_io::read;
