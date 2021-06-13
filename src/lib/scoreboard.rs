@@ -9,7 +9,7 @@ pub struct Scoreboard {
 
 impl Scoreboard {
 
-    // quickly create a new Scoreboard object.
+    /// quickly create a new Scoreboard object.
     pub fn new() -> Scoreboard {
         Scoreboard {
             upper_section: HashMap::new(),
@@ -18,12 +18,12 @@ impl Scoreboard {
         }
     }
 
-    // retrieve the total score for the top section
+    /// retrieve the total score for the top section
     pub fn upper_score(&self) -> u32 {
         self.upper_section.values().fold(0, |tally, value| tally + value)
     }
 
-    // retrieve the total score of the lower section
+    /// retrieve the total score of the lower section
     pub fn lower_sscore(&self) -> u32 {
         self.lower_section.values().fold(0, |tally, value| tally + value)
     }
