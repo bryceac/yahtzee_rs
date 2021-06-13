@@ -8,6 +8,13 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "lib_yahtzee"
+path = "src/lib/lib.rs"
+
+[[bin]]
+name = "yahtzee"
+path = "src/bin.rs"
 [dependencies]
 rand = "0.8.3"
 count_where = "0.1"
