@@ -1,9 +1,5 @@
 // import modules, so that custom types are recognized.
-use crate::game_state::GameState;
-use crate::die::Die;
-use crate::scoreboard::Scoreboard;
-use crate::pair::Pair;
-use crate::combination::Combination;
+use lib_yahtzee::{ Combination, Die, GameState, Pair, Scoreboard };
 use crate::dialogue::Dialogue;
 
 // import modules needed for dealing with hash maps and exiting early
