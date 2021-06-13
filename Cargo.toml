@@ -1,6 +1,6 @@
 [package]
 name = "yahtzee"
-version = "0.2.0"
+version = "0.1.1"
 description = "A CLI implementation of the classic game of Yahtzee"
 authors = ["Bryce Campbell <tonyhawk2100@gmail.com>"]
 license = "MIT"

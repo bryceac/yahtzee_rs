@@ -8,15 +8,24 @@
 
 '''Description:''' Rust port of <a href="https://github.com/bryceac/yahtzee">yahtzee</a>, which should work on platforms either not supported or supported well by Swift.
 
-'''Version:''' 0.1
+'''Version:''' 0.1.1
 
 ==Notes==
 
 This has been tested on macOS Big Sur with Rust 1.51, but <strong>should</strong> work on platform supported by Rust, including Windows, due to cargo actually working on Windows, unlike Swift Package Manager.
 
+==Version History==
+
+<dl>
+<dt style="font-weight:bold">0.1</dt>
+<dd>Released Jun. 12, 2021. Initial release.</dd>
+<dt style="font-weight:bold">0.1.1</dt>
+<dd>Released Jun. 13, 2021. Add bonus feedback, so players know what exactly their bonuses were and move things into a library that can be used by others.</dd>
+</dl>
+
 ==Questions==
 
-<ul>
+<ol>
 <li>
 <dl>
 <dt style="font-weight:bold">Why port this program to Rust?</dt>
@@ -24,6 +33,7 @@ This has been tested on macOS Big Sur with Rust 1.51, but <strong>should</strong
 <p>While Swift is my preferred language, it is not that that usable outside Linux and Mac, even though Windows does have an official Swift compiler at the time of writing this file.</p>
 <p>As a result, I have to use a different programming language, and Rust is the next most comfortable language for me to use.</p>
 <p>On the plus side, it has given me even more experience with Rust, as I could try to see how to piece things together out of multiple files, unlike my other Rust projects, which have all mostly been only one file.</p>
+</dd>
 </dl>
 </li>
 <li>
@@ -32,7 +42,7 @@ This has been tested on macOS Big Sur with Rust 1.51, but <strong>should</strong
 <p>Like the Swift version, this likely will not have a high score table, though I made add one in eventually when I find the appropriate place to store one (most resources suggest location that are not globally available to all users).</p>
 </dd>
 </li>
-</ul>
+</ol>
 
 ==Building==
 
@@ -62,11 +72,33 @@ If on Windows, the MSI file that should be included with releases should be used
 
 ==Usage==
 
-This is an interactive command line interface game, as such only needs to be invoked like this:
+This is an interactive command line interface game, as such it only needs to be invoked like this in a terminal emulator:
 
 <pre>
 yahtzee
 </pre>
+
+===Library===
+
+If you would like to make your own Yahtzee game, the models and enumerations have been moved to a library that can be used by adding the project in the <strong>Cargo.toml</strong> file and adding the following to any source:
+
+<pre>
+use lib_yahtzee::{ Combination, Die, GameState, Pair, Scoreboard }
+</pre>
+
+The above will import the Combination and Pair enumerations, which are used to determine if a roll is a Full House (a Three of a Kind and a pair of another number), Small Straight (any four die forming a sequence), Large Straight (all five die form a sequence), Three of a Kind, Four of a Kind, and Five of a Kind (aka. Yahtzee), the Die struct, which represents a Die used in the game, GameState enumeration, which can be used for game loops or anything else that require knowledge of where the game is at, and the Scoreboard struct, which is used to represent a score sheet and provides way to know about bonuses gained.
+
+To import only one of these, you can do something like this:
+
+<pre>
+use lib_yahtzee::Die;
+</pre>
+
+The above will bring only the Die struct into scope.
+
+Please note that this library was not designed with Serde in mind, though you <strong>should</strong> be able to use it to allow users to customize names for the lower section, thanks to scoreboard having empty HashMaps.
+
+Also, other components, like the Game struct and Library struct are not included in the library, so that the user is free to choose whether they want to give their application a GUI or not. 
 
 ==Support==
 
